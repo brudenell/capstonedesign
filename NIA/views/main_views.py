@@ -2,7 +2,9 @@ from flask import Blueprint, render_template, request, jsonify
 
 import subprocess
 from kiwipiepy import Kiwi
+from konlpy.tag import Okt
 
+okt = Okt()
 kiwi = Kiwi()
 
 bp = Blueprint('main', __name__, url_prefix='/')
@@ -16,7 +18,8 @@ def inputString():
 @bp.route('/NIA', methods=('POST',))
 def emotionAnalysis():
     input = request.form['content']
-    output = kiwi.split_into_sents(input)
+    input_normal = okt.normalize(input)
+    output = kiwi.split_into_sents(input_normal)
     with open("data_text/test.txt", 'w') as f:
         f.write("0\t")
         for i, sent in enumerate(output):
