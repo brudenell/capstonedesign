@@ -13,17 +13,17 @@ class BERTVectorizer:
     def __init__(self, sess, is_bert,
                  bert_model_hub_path="./bert-module"):
 
-        print('initializing!')
+        #print('initializing!')
         self.sess = sess
-        print('sess :', self.sess)
+        #print('sess :', self.sess)
         self.is_bert = is_bert
-        print('is_bert :', self.is_bert)
+        #print('is_bert :', self.is_bert)
         self.bert_model_hub_path = bert_model_hub_path
-        print('bert_model_hub_path :', self.bert_model_hub_path)
+        #print('bert_model_hub_path :', self.bert_model_hub_path)
         self.tokenizer = albert_tokenization.FullTokenizer('./albert-module/assets/v0.vocab')
 
 
-        print('initialized!')
+        #print('initialized!')
     
         
     # def tokenize(self, text: str):
@@ -41,7 +41,7 @@ class BERTVectorizer:
     
     
     def transform(self, text_arr):
-        print('transform started')
+        #print('transform started')
 
         input_ids = []
         input_mask = []

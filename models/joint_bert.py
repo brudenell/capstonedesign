@@ -93,7 +93,7 @@ class JointBertModel(NLUModel):
 
         slots_output = TimeDistributed(Dense(self.slots_num, activation='softmax'))(bert_sequence_output)
 
-        print('slots output :', slots_output.shape)
+        #print('slots output :', slots_output.shape)
 
         self.model = Model(inputs=bert_inputs, outputs=[slots_output, intents_fc])
 
