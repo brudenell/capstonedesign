@@ -1,0 +1,6 @@
+sudo docker pull tensorflow/tensorflow:1.15.0-gpu-py3
+sudo docker run --gpus all -it -v /mnt/data1/tta/NIA/:/home/data tensorflow/tensorflow:1.15.0-gpu-py3 bash
+
+cd home/data
+apt-get install wget
+pip install -r requirements.txt
