@@ -89,7 +89,7 @@ def get_results(input_ids, input_mask, segment_ids,  sequence_lengths, tags_arr,
     for i in range(len(intents)):
         #
         #print("예상한 레이블:",first_inferred_intent_final[i],"    실제레이블:",intents[i],sep=" ")
-        print("감정 분석 결과: ", first_inferred_intent_final[i])
+        print("감정 분석 결과: ", first_inferred_intent_final[i], first_inferred_intent_score_final[i])
         #
         if first_inferred_intent_final[i] == intents[i] and first_inferred_intent_score_final[i] >= pv:
                 tp += 1
@@ -119,12 +119,15 @@ def get_results(input_ids, input_mask, segment_ids,  sequence_lengths, tags_arr,
                 tn_sents += ('score: {}\n'.format(first_inferred_intent_score_final[i]))
                 tn_sents += ('ansr: {}\n'.format(intents[i].strip()))
 
-    precision = tp / (tp + fp)
-    recall = tp / (tp + fn)
-    f1_score = 2 * (precision * recall) / (precision + recall)
-    f1_score = round(f1_score, 3)
-    precision = round(precision, 3)
-    recall = round(recall, 3)
+    #precision = tp / (tp + fp)
+    #recall = tp / (tp + fn)
+    #f1_score = 2 * (precision * recall) / (precision + recall)    
+    #f1_score = round(f1_score, 3)
+    #precision = round(precision, 3)
+    #recall = round(recall, 3)
+    precision = 0
+    recall = 0
+    f1_score = 0
 
     return f1_score, precision, recall, acc, intent_incorrect, intent_correct, tp, tn, fp, fn, tp_sents, tn_sents, fp_sents, fn_sents
 
@@ -160,9 +163,10 @@ tokenizer = albert_tokenization.FullTokenizer('./albert-module/assets/v0.vocab')
 bert_vectorizer = BERTVectorizer(sess, is_bert, bert_model_hub_path)
 
 # loading models
-print('Loading models ...')
+#print('Loading models ...')
 if not os.path.exists(load_folder_path):
-    print('Folder `%s` not exist' % load_folder_path)
+    pass
+    #print('Folder `%s` not exist' % load_folder_path)
 
 with open(os.path.join(load_folder_path, 'tags_vectorizer.pkl'), 'rb') as handle:
     tags_vectorizer = pickle.load(handle)
@@ -188,14 +192,14 @@ tags_vectorizer.fit(data_tags_arr + data_tags_arr_f)
 data_tags_arr = tags_vectorizer.transform(data_tags_arr, data_input_ids)
 data_tags_arr_f = tags_vectorizer.transform(data_tags_arr_f, data_input_ids_f)
 
-
+#원래 주석
 #print(data_tags_arr[1])
 #print(data_input_ids[1])
 
 
 
 
-print('==== Evaluation ====')
+#print('==== Evaluation ====')
 f1_score, precision, recall, acc, intent_incorrect, intent_correct, tp, tn, fp, fn, tp_sents, tn_sents, fp_sents, fn_sents = get_results(
                                                             data_input_ids, 
                                                             data_input_mask, 
@@ -213,7 +217,8 @@ f1_score, precision, recall, acc, intent_incorrect, intent_correct, tp, tn, fp, 
                                                             intents_label_encoder)
 
 # 테스트 결과를 모델 디렉토리의 하위 디렉토리 'test_results'에 저장해 준다.
-print("saving test_results to " + load_folder_path)
+#print("saving test_results to " + load_folder_path)
+#원래 주석
 result_path = os.path.join(load_folder_path, 'test_results/before')
 em_result_path = os.path.join(result_path, 'EM')
 f1_result_path = os.path.join(result_path, 'F1')
@@ -254,4 +259,4 @@ False Negative = {fn}
 ''')
 
 tf.compat.v1.reset_default_graph()
-print("======= Done =======")
+#print("======= Done =======")
