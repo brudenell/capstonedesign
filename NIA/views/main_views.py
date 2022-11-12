@@ -17,8 +17,8 @@ def inputString():
 def emotionAnalysis():
     input = request.form['content']
     output = kiwi.split_into_sents(input)
-    with open("data_text/test.txt", 'a') as f:
-        f.write("\n0\t")
+    with open("data_text/test.txt", 'w') as f:
+        f.write("0\t")
         for i, sent in enumerate(output):
             f.write(sent.text)
             if i < len(output) - 1:
