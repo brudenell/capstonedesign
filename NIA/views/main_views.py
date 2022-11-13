@@ -47,5 +47,4 @@ def emotionAnalysis():
     result = {"emotion" : emotion,
               "label" : label,
               "score" : score}
-    #return jsonify(result)
-    return a2
+    return jsonify(result)

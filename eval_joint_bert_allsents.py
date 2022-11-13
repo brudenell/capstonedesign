@@ -200,7 +200,7 @@ data_tags_arr_f = tags_vectorizer.transform(data_tags_arr_f, data_input_ids_f)
 
 
 
-starttime = time.time()
+#starttime = time.time()
 #print('==== Evaluation ====')
 f1_score, precision, recall, acc, intent_incorrect, intent_correct, tp, tn, fp, fn, tp_sents, tn_sents, fp_sents, fn_sents = get_results(
                                                             data_input_ids, 
@@ -262,5 +262,5 @@ False Negative = {fn}
 
 tf.compat.v1.reset_default_graph()
 #print("======= Done =======")
-endtime = time.time()
-print(endtime - starttime)
+# endtime = time.time()
+# print(endtime - starttime)
