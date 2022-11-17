@@ -1,5 +1,6 @@
 import sys
-sys.path.append("/mnt/c/flask_capstone")
+#sys.path.append("/mnt/c/flask_capstone")
+sys.path.append("/home/ubuntu/projects/capstone")
 
 from readers.goo_format_reader import Reader
 from vectorizers.bert_vectorizer import BERTVectorizer
